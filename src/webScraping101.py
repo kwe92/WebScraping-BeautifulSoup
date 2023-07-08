@@ -3,20 +3,19 @@ from requests import Response
 from bs4 import BeautifulSoup
 
 
-uri = 'https://quotes.toscrape.com/'
-
 def getData(uri: str):
     response: Response = requests.get(uri)
     siteHTML = BeautifulSoup(response.text,"html.parser")
     return siteHTML
 
-def parseHTML(getDataCallback: function, criterion: dict):
-    tag: list = criterion['tag']
-    atters: dict = criterion['attrs']
-    pass
+def parseHTML(siteHTML):
+    quotes = siteHTML.findAll("span",attrs={'class':'text'})
+    return quotes
 
 def main():
-    pass
+    uri = 'https://quotes.toscrape.com/'
+    siteHTML = getData(uri)
+    print(parseHTML(siteHTML))
 
 if __name__ == '__main__':
     main()
