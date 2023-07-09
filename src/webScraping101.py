@@ -19,8 +19,12 @@ def main():
     uri = 'https://quotes.toscrape.com/'
     siteHTML = getData(uri)
     quotes, authors = parseHTML(siteHTML)
-    print(f'quotes {quotes}')
-    print(f'authors {authors}')
+
+    for index, quote in enumerate(quotes):
+        print(index, quote, '\n')
+
+    for index, author in enumerate(authors):
+        print(index, author, '\n')
 
 
 if __name__ == '__main__':
