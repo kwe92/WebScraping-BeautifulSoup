@@ -20,12 +20,21 @@ def main():
     siteHTML = getData(uri)
     quotes, authors = parseHTML(siteHTML)
 
-    for index, quote in enumerate(quotes):
-        print(index, quote, '\n')
+    print('\n')
+    # for index, quote in enumerate(quotes):
+    #     print(index, quote.text, '\n')
 
-    for index, author in enumerate(authors):
-        print(index, author, '\n')
+    # for index, author in enumerate(authors):
+    #     print(index, author.text, '\n')
 
+    for quote, author in zip(quotes, authors):
+        print(f'''
+{quote.text}
+
+    - {author.text}
+''', '\n')
+
+    
 
 if __name__ == '__main__':
     main()
