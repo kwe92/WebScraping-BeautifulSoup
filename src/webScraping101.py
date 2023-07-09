@@ -1,6 +1,7 @@
 import requests
+import pandas as pd
 from requests import Response
-from bs4 import BeautifulSoup, ResultSet, Tag
+from bs4 import BeautifulSoup, ResultSet
 
 
 def getData(uri: str):
@@ -29,9 +30,27 @@ def main():
     siteHTML = getData(uri)
     quotes, authors = parseHTML(siteHTML)
 
-    printQuotes(quotes, authors)
+    quotesText = []
+    authorsText = []
 
-    print('\n')
+    for quote, author in zip(quotes, authors):
+        quotesText.append(quote.text)
+        authorsText.append(author.text)
+    quotesData = {'authors': authorsText,
+            'quotes': quotesText}
+    
+    quotesDataFrame = pd.DataFrame(data=quotesData)
+    quotesDataFrame['quotes'] = quotesDataFrame['quotes'].apply(lambda x: x.replace('"',''))
+    quotesDataFrame.to_excel('quotesData.xlsx', index=False)
+
+    print('DATA SAVED SUCCESSFULLY')
+
+    # print(quotesDataFrame)
+
+
+    # printQuotes(quotes, authors)
+
+    # print('\n')
 
 if __name__ == '__main__':
     main()
