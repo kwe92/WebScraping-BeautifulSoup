@@ -40,7 +40,8 @@ def main():
             'quotes': quotesText}
     
     quotesDataFrame = pd.DataFrame(data=quotesData)
-    quotesDataFrame['quotes'] = quotesDataFrame['quotes'].apply(lambda x: x.replace('"',''))
+
+    quotesDataFrame['quotes'] = quotesDataFrame['quotes'].apply(lambda x: x.replace('“', ''))
     quotesDataFrame.to_excel('quotesData.xlsx', index=False)
 
     print('DATA SAVED SUCCESSFULLY')
