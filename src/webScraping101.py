@@ -41,17 +41,12 @@ def main():
     
     quotesDataFrame = pd.DataFrame(data=quotesData)
 
-    quotesDataFrame['quotes'] = quotesDataFrame['quotes'].apply(lambda x: x.replace('“', ''))
+    quotesDataFrame['quotes'] = quotesDataFrame['quotes'].apply(lambda x: x.replace('“', '')).apply(lambda x: x.replace('”', ''))
     quotesDataFrame.to_excel('quotesData.xlsx', index=False)
 
     print('DATA SAVED SUCCESSFULLY')
 
-    # print(quotesDataFrame)
-
-
-    # printQuotes(quotes, authors)
-
-    # print('\n')
+    print(quotesDataFrame['quotes'][0])
 
 if __name__ == '__main__':
     main()
